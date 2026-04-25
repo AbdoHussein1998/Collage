@@ -1,0 +1,50 @@
+version: "3.9"
+
+name: rag
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: rag_mongo
+    restart: unless-stopped
+
+    ports:
+      - "${MONGO_PORT}:27017"
+
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+
+    volumes:
+      - mongo_data:/data/db
+
+    networks:
+      - rag_network
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: rag_qdrant
+    restart: unless-stopped
+
+    ports:
+      - "${QDRANT_REST_PORT}:6333"
+      - "${QDRANT_GRPC_PORT}:6334"
+
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+    networks:
+      - rag_network
+
+networks:
+  rag_network:
+    name: rag_network
+    driver: bridge
+
+volumes:
+  mongo_data:
+    name: rag_mongo_data
+
+  qdrant_data:
+    name: rag_qdrant_data
