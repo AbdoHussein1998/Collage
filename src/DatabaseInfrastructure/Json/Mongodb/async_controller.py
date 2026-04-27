@@ -15,9 +15,9 @@ from pymongo.errors import DuplicateKeyError, BulkWriteError, ConnectionFailure 
 from pymongo import UpdateOne
 import loguru 
 
-from .Constants import UpdateOperation
+from .constants import UpdateOperation
 
-class AsyncMongodbControllerClass:
+class MongoProvider:
     """
     Production-grade async MongoDB controller using Motor for async operations.
     

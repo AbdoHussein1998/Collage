@@ -12,9 +12,12 @@ def create_lifespan(logger: Optional[loguru._logger.Logger] = None):
     if logger is None:
         logger = loguru.logger
 
+
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         logger.info("FastAPI app is starting up...")
+        
+
 
         yield
 

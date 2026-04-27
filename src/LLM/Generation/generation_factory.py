@@ -2,7 +2,6 @@ from dataclasses import dataclass, asdict
 from typing import Optional, Final, Dict, Any
 from langchain.chat_models import init_chat_model
 import loguru
-
 import asyncio
 
 
@@ -70,7 +69,7 @@ class GenerationFactory:
     def _validate_config(
         cls,
         model_config: ModelConfig,
-        logger: Logger,
+        logger: loguru._logger.Logger,
     ) -> None:
         """Validate ModelConfig instance."""
 
@@ -117,7 +116,7 @@ class GenerationFactory:
             logger.error("Validation failed: {}", str(e))
             raise
 
-        # --- Build kwargs (clean one-liner!) ---
+        # --- Build kwargs ---
         kwargs = model_config.to_dict()
 
         if api_key:
