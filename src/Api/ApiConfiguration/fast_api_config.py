@@ -1,20 +1,23 @@
 from contextlib import asynccontextmanager
+from typing import Optional
 from fastapi import FastAPI
 import loguru
-from typing import Optional
+from .api_setting import get_basic_settings
+from LLM.Embedding import EmbeddingFactory
 
-from typing import Optional
-from contextlib import asynccontextmanager
-from fastapi import FastAPI
-import loguru
 
 def create_lifespan(logger: Optional[loguru._logger.Logger] = None):
     if logger is None:
         logger = loguru.logger
 
+
     @asynccontextmanager
     async def lifespan(app: FastAPI):
-        logger.info("FastAPI app is starting up...")
+
+        logger.info("FastAPI app is starting up...")        
+        app.state.basic_settings=get_basic_settings()
+
+
 
         yield
 

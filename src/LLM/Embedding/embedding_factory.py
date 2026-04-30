@@ -1,8 +1,12 @@
-from langchain.embeddings import init_embeddings
-import loguru 
 import asyncio
-from typing import Final, Optional
+from typing import Final, Optional,Union,Any
+
+from langchain.embeddings import init_embeddings
+from langchain_core.embeddings import Embeddings
+from langchain_core.runnables import Runnable
 import loguru
+
+
 
 class EmbeddingFactory:
     """Factory class for creating embedding instances from various providers."""
@@ -23,7 +27,7 @@ class EmbeddingFactory:
         cls,
         embedding_provider: str,
         model_name: str,
-        logger: Logger,
+        logger: loguru._logger.Logger,
     ) -> tuple[str, str]:
         """Validate and sanitize input parameters."""
 
@@ -70,8 +74,8 @@ class EmbeddingFactory:
         api_key: str = None,
         url: str = None,
         logger: Optional[loguru._logger.Logger] = None,
-        **kwargs
-    ):
+        **kwargs)->Embeddings:
+        # Union[Embeddings, Runnable[Any, list[float]]]:
         """Create an embeddings instance from a provider and model name.
 
         Args:
@@ -132,4 +136,12 @@ class EmbeddingFactory:
                 str(e),
             )
             raise
+
+
+
+
+
+
+
+
 
