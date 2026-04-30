@@ -113,6 +113,7 @@ class QdrantProvider(VectorDBInterface):
 
         instance.logger.info("QdrantProvider initialized")
         instance.logger.success("QdrantProvider is ready to use")
+        await instance.connect()
         return instance
 
     # ------------------------------------------------------------------

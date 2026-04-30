@@ -1,34 +1,26 @@
-from abc import ABC
+from abc import ABC,abstractmethod
 from typing import Optional
 import loguru
 
+  
 
 class ServiceInterface(ABC):
     def __init__(
         self,
-        logger: Optional[loguru._logger.Logger] = None
-    ):
+        logger: Optional[loguru._logger.Logger] = None,
+    ) -> None:
         self.logger = logger or loguru.logger
 
     @classmethod
+    @abstractmethod
     async def init_service(
         cls,
-        logger: Optional[loguru._logger.Logger] = None,
         *args,
-        **kwargs
+        **kwargs,
     ):
-        logger = logger or loguru.logger
+        """
+        Service-specific async factory initialization.
+        """
+        pass
 
-        logger.info(f"Initializing service: {cls.__name__}")
-
-        instance = cls(
-            logger=logger,
-            *args,
-            **kwargs
-        )
-
-        logger.success(
-            f"Service {cls.__name__} initialized successfully"
-        )
-
-        return instance
+   

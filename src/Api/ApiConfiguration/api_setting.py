@@ -1,7 +1,7 @@
 
 
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings,SettingsConfigDict
 
 
 
@@ -22,13 +22,12 @@ class BasicSettings(BaseSettings):
     #########################
     MONGODB_URL:str
     MONGODB_DB_NAME:str
-    MONGODB_COLLECTION_MAIN:str
     
     #########################
     # Qdrant Configuration
     #########################
-    QDRANT_DB_API_KEY:str
-    QDRANT_DB_URL:str
+    VECTOR_DB_API_KEY:str
+    VECTOR_DB_URL:str
     VECTOR_SEARCH_FORMULA:str
     VECTOR_DATABASE_DEFULT_NAME:str
 
@@ -37,7 +36,10 @@ class BasicSettings(BaseSettings):
     # Embedding Configuration
     #########################
     DEFAULT_EMBEDDING_MODEL:str
+    DEFAULT_EMBEDDING_MODEL_API_KEY:str
+    DEFAULT_EMBEDDING_PROVIDER:str
     DEFAULT_EMBEDDING_MODEL_CONNECTION_URL:str
+
 
     #########################
     # Generation Configuration
@@ -46,12 +48,19 @@ class BasicSettings(BaseSettings):
     DEFAULT_GENERATION_MODEL:str
     DEFAULT_GENERATION_MODEL_CONNECTION_URL:str
 
-    
+    model_config = SettingsConfigDict(
+    env_file="src/.env",
+    extra="ignore"
+)
 
 
 
 
-
+def get_basic_settings() -> BasicSettings:
+    """
+    Get the basic settings for the application.
+    """
+    return BasicSettings()
 
 
 
