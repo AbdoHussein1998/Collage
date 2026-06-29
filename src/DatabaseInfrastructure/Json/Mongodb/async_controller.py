@@ -15,7 +15,7 @@ from pymongo.errors import DuplicateKeyError, BulkWriteError, ConnectionFailure 
 from pymongo import UpdateOne
 import loguru 
 
-from .constants import UpdateOperation
+from .Constants import UpdateOperation
 
 class MongoProvider:
     """
