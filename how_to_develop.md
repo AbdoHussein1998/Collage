@@ -356,6 +356,31 @@ Services know nothing about HTTP, while routers know nothing about business logi
 
 ---
 
+# Files and Folder naming 
+* All files Folder Names Should be Captalized the firstletter only 
+* All .py folders should be in small_snake_case
+Example 
+
+```
+📦src
+ ┣ 📂Api
+ ┃ ┣ 📂ApiConfiguration
+ ┃ ┃ ┣ 📜api_setting.py
+ ┃ ┃ ┗ 📜fast_api_config.py
+ ┃ ┗ 📂Routes
+ ┃ ┃ ┗ 📂Client
+ ┃ ┃ ┃ ┗ 📜basic_client_routes.py
+ ┣ 📂DatabaseInfrastructure
+ ┃ ┣ 📂Json
+ ┃ ┃ ┣ 📂Mongodb
+ ┃ ┃ ┃ ┣ 📜async_controller.py
+ ┃ ┃ ┃ ┣ 📜Constants.py
+ ┃ ┃ ┃ ┗ 📜__init__.py
+ ┃ ┃ ┣ 📜json_interface.py
+ ┃ ┃ ┗ 📜__init__.py
+```
+
+
 # Design Rules
 
 * Classes must use **CamelCase**.
